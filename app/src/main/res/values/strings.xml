@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ActionGame</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="mainmenu_fragment_label">Main Menu Fragment</string>
+    <string name="action_fragment_label">Action Fragment</string>
+    <string name="play">Play</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+</resources>
