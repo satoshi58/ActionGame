@@ -71,25 +71,38 @@ public class ActionFragment extends Fragment {
         Log.d("ActionFragment Log", "DisplaySize.x = " + displaySize.x + ", DisplaySize.y = " + displaySize.y);
         Log.d("ActionFragment Log", "realSize.x = " + realSize.x + ", realSize.y = " + realSize.y);
         Log.d("ActionFragment Log", "layoutSize.x = " + layoutSize.x + ", layoutSize.y = " + layoutSize.y);
+        Log.d("ActionFragment Log", "layoutSize.x = " + layout.getWidth() + ", layoutSize.y = " + layout.getHeight());
 
-
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        ImageView imageView = new ImageView(getContext());
-        imageView.setImageBitmap(bmp);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(200, 200);
-        layoutParams.leftMargin = 0;
-        layoutParams.topMargin = 0;
-        imageView.setLayoutParams(layoutParams);
-        layout.addView(imageView);
-
-        Bitmap bmp2 = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        ImageView imageView2 = new ImageView(getContext());
-        imageView2.setImageBitmap(bmp2);
-        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(200, 200);
-        layoutParams2.leftMargin = displaySize.x - 200;
-        layoutParams2.topMargin = displaySize.y - 200;
-        imageView2.setLayoutParams(layoutParams2);
-        layout.addView(imageView2);
+        if(true){
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.block_brown);
+            ImageView imageView = new ImageView(getContext());
+            imageView.setImageBitmap(bmp);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
+            layoutParams.leftMargin = 0;
+            layoutParams.topMargin = 0;
+            imageView.setLayoutParams(layoutParams);
+            layout.addView(imageView);
+        }
+        if(true){
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.block_gray);
+            ImageView imageView = new ImageView(getContext());
+            imageView.setImageBitmap(bmp);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
+            layoutParams.leftMargin = 150;
+            layoutParams.topMargin = 150;
+            imageView.setLayoutParams(layoutParams);
+            layout.addView(imageView);
+        }
+        if(true){
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.block_gray);
+            ImageView imageView = new ImageView(getContext());
+            imageView.setImageBitmap(bmp);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
+            layoutParams.leftMargin = 0;
+            layoutParams.topMargin = 300;
+            imageView.setLayoutParams(layoutParams);
+            layout.addView(imageView);
+        }
 
         //start handler
         final int flame = 32;
@@ -97,7 +110,6 @@ public class ActionFragment extends Fragment {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-
                 handler.postDelayed(this, 1000 / flame);
             }
         };
