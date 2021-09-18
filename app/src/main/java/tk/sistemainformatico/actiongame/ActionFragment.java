@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 public class ActionFragment extends Fragment {
+    ComponentManager m_componentManager;
+    RelativeLayout m_layout;
 
     @Override
     public View onCreateView(
@@ -40,7 +42,8 @@ public class ActionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RelativeLayout layout = (RelativeLayout)view.findViewById(R.id.action_layout);
+        m_layout = (RelativeLayout)view.findViewById(R.id.action_layout);
+        m_componentManager = new ComponentManager(getResources(), getContext());
 
         //acquire display size
         //display size
@@ -64,55 +67,33 @@ public class ActionFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        m_componentManager.setFrameSize(realSize);
         //layout size
         Point layoutSize = new Point();
-        layoutSize.set(layout.getWidth(), layout.getHeight());
+        layoutSize.set(m_layout.getWidth(), m_layout.getHeight());
         //debug log
         Log.d("ActionFragment Log", "DisplaySize.x = " + displaySize.x + ", DisplaySize.y = " + displaySize.y);
         Log.d("ActionFragment Log", "realSize.x = " + realSize.x + ", realSize.y = " + realSize.y);
         Log.d("ActionFragment Log", "layoutSize.x = " + layoutSize.x + ", layoutSize.y = " + layoutSize.y);
-        Log.d("ActionFragment Log", "layoutSize.x = " + layout.getWidth() + ", layoutSize.y = " + layout.getHeight());
+        Log.d("ActionFragment Log", "layoutSize.x = " + m_layout.getWidth() + ", layoutSize.y = " + m_layout.getHeight());
 
-        if(true){
-            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.block_brown);
-            ImageView imageView = new ImageView(getContext());
-            imageView.setImageBitmap(bmp);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
-            layoutParams.leftMargin = 0;
-            layoutParams.topMargin = 0;
-            imageView.setLayoutParams(layoutParams);
-            layout.addView(imageView);
-        }
-        if(true){
-            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.block_gray);
-            ImageView imageView = new ImageView(getContext());
-            imageView.setImageBitmap(bmp);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
-            layoutParams.leftMargin = 150;
-            layoutParams.topMargin = 150;
-            imageView.setLayoutParams(layoutParams);
-            layout.addView(imageView);
-        }
-        if(true){
-            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.block_gray);
-            ImageView imageView = new ImageView(getContext());
-            imageView.setImageBitmap(bmp);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
-            layoutParams.leftMargin = 0;
-            layoutParams.topMargin = 300;
-            imageView.setLayoutParams(layoutParams);
-            layout.addView(imageView);
-        }
+        m_layout.addView(m_componentManager.addComponent(R.mipmap.block_brown, new Point(150, 150), new Point(0,0)));
+        m_layout.addView(m_componentManager.addComponent(R.mipmap.block_gray, new Point(150, 150), new Point(150,150)));
+        m_layout.addView(m_componentManager.addComponent(R.mipmap.block_gray, new Point(150, 150), new Point(0,300)));
 
         //start handler
-        final int flame = 32;
+        final int fps = 32;
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                handler.postDelayed(this, 1000 / flame);
+                handler.postDelayed(this, 1000 / fps);
+                m_componentManager.shift(new Point(-1,0));
+                x += 10;
+
             }
         };
         handler.post(runnable);
     }
+    int x;
 }
